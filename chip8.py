@@ -23,8 +23,11 @@ kb_map = {
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 def load_rom():
+    rom = None
     rom_file = open(rom_path, 'rb');
-    rom = rom_file.read(); rom_file.close(); rom = bytearray(rom)
+    with open(rom_path, 'rb') as rom_file:
+        rom = bytearray(rom_file.read())
+
     offset = reg['pc']
 
     for byte in rom:
@@ -34,9 +37,10 @@ def load_rom():
 def load_fonts():
     offset = 0x0
 
-    for line in open(fonts_path, 'r'):
-        ram[offset] = int(line.strip(), 16)
-        offset += 0x1
+    with open(fonts_path, 'r') as data:
+        for line in data:
+            ram[offset] = int(line.strip(), 16)
+            offset += 0x1
 
 def init():
     global screen0
