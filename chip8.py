@@ -35,7 +35,7 @@ def load_fonts():
     offset = 0x0
 
     for line in open(fonts_path, 'r'):
-        ram[offset] = eval(line)
+        ram[offset] = int(line.strip(), 16)
         offset += 0x1
 
 def init():
