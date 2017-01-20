@@ -24,7 +24,6 @@ kb_map = {
 
 def load_rom():
     rom = None
-    rom_file = open(rom_path, 'rb');
     with open(rom_path, 'rb') as rom_file:
         rom = bytearray(rom_file.read())
 
